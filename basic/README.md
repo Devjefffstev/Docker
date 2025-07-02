@@ -40,6 +40,8 @@ Once the container is running, you can test the endpoints:
 ```bash
 curl http://localhost:8000/
 ```
+![image](https://github.com/user-attachments/assets/54790e47-bd21-4680-990c-1a2cec018347)
+
 ![alt text](image.png)
 ### Greeting endpoint
 ```bash

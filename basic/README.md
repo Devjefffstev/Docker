@@ -19,6 +19,18 @@ docker build -t my-fastapi-app -f basicExample .
 ```bash
 docker build -t my-fastapi-app:v1 -f basicExample .
 ```
+### Build with custom repository and version tag 
+```bash
+docker build -t cosmoincorp/demo:my-fastapi-app -f basicExample .
+```
+![alt text](./images/dockerimage.png)
+
+
+#### Company: cosmoincorp
+#### Repository Name: demo
+#### Tag:my-fastapi-app
+
+![alt text](./images/dockerhubimage.png)
 
 ## Running the Container
 
@@ -40,14 +52,12 @@ Once the container is running, you can test the endpoints:
 ```bash
 curl http://localhost:8000/
 ```
-![image](https://github.com/user-attachments/assets/54790e47-bd21-4680-990c-1a2cec018347)
-
-![alt text](image.png)
+![alt text](./images/image.png)
 ### Greeting endpoint
 ```bash
 curl http://localhost:8000/greet/YourName
 ```
-![alt text](image2.png)
+![alt text](./images/image2.png)
 ## Additional Docker Commands
 
 ### List running containers

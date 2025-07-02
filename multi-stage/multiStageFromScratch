@@ -1,0 +1,12 @@
+# syntax=docker/dockerfile:1
+FROM golang:1.24
+WORKDIR /src
+COPY ./basicExamples.go .
+RUN go build -o /bin/hello ./basicExamples.go
+# Use a minimal base image for the final stage
+# This reduces the image size and attack surface
+# You can use 'scratch' for an empty base image
+# or a minimal image like 'alpine' or 'busybox'
+FROM scratch
+COPY --from=0 /bin/hello /bin/hello
+CMD [ "/bin/hello" ]

@@ -8,6 +8,8 @@ func main()  {
 	fmt.Print("Hello, using Print \n")
 	// Testing Print 
 	fmt.Print("Hello, using Print line 2")
+	// Calling a test function
+	test()
 }
 
 func test(){

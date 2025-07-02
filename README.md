@@ -42,5 +42,6 @@ Some of the most common instructions in a Dockerfile include:
 - **ENV <name> <value>** - this instruction sets an environment variable that a running container will use.
 - **EXPOSE <port-number>** - this instruction sets configuration on the image that indicates a port the image would like to expose.
 - **USER <user-or-uid>** - this instruction sets the default user for all subsequent instructions.
+- **ENTRYPOINT ["<command>", "<arg1>"]** - this instruction sets the main command that will always be executed when the container starts, and cannot be overridden by docker run arguments.
 - **CMD ["<command>", "<arg1>"]** - this instruction sets the default command a container using this image will run.
 

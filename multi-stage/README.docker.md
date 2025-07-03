@@ -7,6 +7,17 @@ This example demonstrates the benefits of multi-stage Docker builds by comparing
 
 Multi-stage builds allow you to use multiple `FROM` statements in your Dockerfile. Each `FROM` instruction begins a new stage of the build, and you can selectively copy artifacts from one stage to another, leaving behind everything you don't want in the final image.
 
+## Understanding the image layers 
+Each layer in an image contains a set of filesystem changes - additions, deletions, or modifications. That allows you to use the same image for multiple container. 
+
+### Lower Directories 
+They are the layers that coming from the image
+
+### Upper Directory
+It is a unique writable space specific to the container. 
+
+![alt text](./images/layer.png)
+
 ## Single-Stage Build (Heavy Image)
 
 ### Dockerfile Content - Stage 1 Only

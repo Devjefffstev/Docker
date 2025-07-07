@@ -1,0 +1,28 @@
+# syntax=docker/dockerfile:1
+ARG BASE_IMAGE=golang:1.24
+
+FROM golang:1.24
+WORKDIR /src
+COPY ./basicExamples.go .
+ENV TEST_ENV_VAR_TEST=HelloWorld
+RUN echo "export MYVAR_TEST='$TEST_ENV_VAR_TEST'" > env.sh
+RUN TEST_ENV_VAR=$(cat /etc/os-release | grep PRETTY_NAME | cut -d '=' -f2 | tr -d '"') && \
+    echo "export MYVAR='$TEST_ENV_VAR'" >> env.sh
+RUN cat env.sh
+RUN go build -o /bin/hello ./basicExamples.go
+
+
+# Add a second stage to the Dockerfile
+# This stage will copy the environment variable and source it in the final image
+FROM ${BASE_IMAGE}
+WORKDIR /src
+COPY --from=0 /src/env.sh /src/env.sh
+COPY /scripts /src
+## Copy the compiled binary from the first stage
+## you must copy to /etc/environment 
+##
+## What is the /etc/environment file?
+# Before we delve into the how, it’s crucial to understand what the `/etc/environment` file is. It is a system-wide configuration file in Linux that is read upon system boot. This file is utilized to set up environment variables — key-value pairs that can be used by processes in the operating system.
+RUN cat /src/env.sh >> /etc/environment
+RUN cat /etc/environment
+ENTRYPOINT ["/bin/bash", "-c", "cat /etc/environment && source /etc/environment && bash read_printenv.sh "]
